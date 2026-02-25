@@ -3,199 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>越西县易地搬迁社区产业“数智大脑”</title>
+    <title>易地搬迁社区产业“数智大脑”</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <style>
-        body { background-color: #0f0f0f; color: #fff; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; overflow-x: hidden; }
-        .yi-red { background-color: #C8102E; }
-        .yi-yellow { color: #FFCD00; }
-        .glass-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; }
-        .nav-btn { cursor: pointer; transition: all 0.3s; border-bottom: 2px solid transparent; }
-        .nav-btn:hover, .nav-btn.active { color: #C8102E; border-bottom: 2px solid #C8102E; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.8s; }
-        .progress-line::before { content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: #333; z-index: -1; }
+        /* 简单的过渡动画 */
+        .fade-enter-active, .fade-leave-active { transition: opacity 0.3s ease; }
+        .fade-enter-from, .fade-leave-to { opacity: 0; }
     </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-800 font-sans">
+    <div id="app" class="flex h-screen overflow-hidden">
 
-    <nav class="flex items-center justify-between px-8 py-4 border-b border-gray-800 bg-black sticky top-0 z-50">
-        <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 yi-red rounded-full flex items-center justify-center font-bold text-xl">越</div>
-            <h1 class="text-xl font-bold tracking-widest">数智大脑 <span class="yi-yellow text-sm font-normal">Smarter Community v2.0</span></h1>
-        </div>
-        <div class="flex space-x-8 text-sm font-medium">
-            <div onclick="showTab('admin')" class="nav-btn active py-2" id="btn-admin">生产管理中枢</div>
-            <div onclick="showTab('market')" class="nav-btn py-2" id="btn-market">文化展示门户</div>
-            <div onclick="showTab('trace')" class="nav-btn py-2" id="btn-trace">透明溯源进度</div>
-        </div>
-        <div class="px-4 py-1 rounded-full border border-yellow-600 text-yellow-600 text-xs">越西县·易地搬迁社区</div>
-    </nav>
-
-    <main class="p-6">
-
-        <section id="admin" class="tab-content active">
-            <div class="grid grid-cols-12 gap-6">
-                <div class="col-span-3 glass-card p-5">
-                    <h3 class="border-l-4 border-red-600 pl-2 mb-4 font-bold">劳动力供给监测</h3>
-                    <div class="space-y-4">
-                        <div class="bg-white/5 p-3 rounded">
-                            <div class="flex justify-between text-xs text-gray-400 mb-1"><span>活跃绣娘</span><span>842人</span></div>
-                            <div class="h-1 bg-gray-800 rounded-full"><div class="h-full yi-red w-3/4"></div></div>
-                        </div>
-                        <div class="text-xs space-y-3">
-                            <div class="flex items-center justify-between p-2 bg-red-900/20 border border-red-900/30 rounded">
-                                <span>阿莫某某 (高级工)</span>
-                                <span class="text-green-400">14:00-16:00 空闲</span>
-                            </div>
-                            <div class="flex items-center justify-between p-2 bg-gray-800 rounded">
-                                <span>吉木某某 (中级工)</span>
-                                <span class="text-gray-500">接送孩子中</span>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
-                <div class="col-span-6 glass-card p-5 relative overflow-hidden">
-                    <h3 class="border-l-4 border-red-600 pl-2 mb-4 font-bold">柔性任务自动拆解与派发</h3>
-                    <div class="flex items-center justify-center h-64 border-2 border-dashed border-gray-700 rounded-xl">
-                        <div class="text-center">
-                            <div class="animate-pulse mb-2">⚡ 正在接入市场订单: <span class="yi-yellow">棉花娃娃·彝风系列 (500件)</span></div>
-                            <div class="flex space-x-2 justify-center">
-                                <div class="p-2 bg-blue-600 text-[10px] rounded">工序A: 布料裁剪</div>
-                                <div class="p-2 bg-red-600 text-[10px] rounded">工序B: 襟边刺绣</div>
-                                <div class="p-2 bg-yellow-600 text-[10px] rounded">工序C: 饰品组装</div>
-                            </div>
-                            <div class="mt-4 text-xs text-gray-500">算法已匹配: 42位绣娘符合工效要求</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-span-3 glass-card p-5">
-                    <h3 class="border-l-4 border-red-600 pl-2 mb-4 font-bold">CV智能质检监控</h3>
-                    <div class="aspect-square bg-black rounded mb-3 flex items-center justify-center relative border border-gray-800">
-                        <div class="absolute inset-0 border-2 border-red-500 animate-pulse opacity-50"></div>
-                        <span class="text-[10px] text-red-500 absolute top-2 left-2 font-mono">DETECTING: 走线不均</span>
-                        <div class="text-center">
-                            <div class="text-4xl">🔍</div>
-                            <div class="text-[10px] mt-2 text-gray-400">正在对比标准图谱...</div>
-                        </div>
-                    </div>
-                    <button class="w-full py-2 bg-red-600 hover:bg-red-700 text-sm rounded transition">推送纠偏教学至移动端</button>
-                    
-                </div>
+        <aside class="w-64 bg-indigo-900 text-white flex flex-col shadow-xl">
+            <div class="p-6 text-center border-b border-indigo-800">
+                <h1 class="text-2xl font-bold tracking-wider">数智大脑</h1>
+                <p class="text-xs text-indigo-300 mt-2">社区产业协同治理中枢</p>
             </div>
-        </section>
-
-        <section id="market" class="tab-content">
-            <div class="max-w-6xl mx-auto">
-                <div class="relative h-64 rounded-2xl overflow-hidden mb-8">
-                    <img src="https://images.unsplash.com/photo-1624823183493-6f947690623a?auto=format&fit=crop&q=80&w=1200" class="w-full h-full object-cover opacity-60">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent flex flex-col justify-end p-8">
-                        <h2 class="text-4xl font-bold italic">非遗的现代重塑</h2>
-                        <p class="yi-yellow mt-2">源自四川越西县·跨越千年的指尖温度</p>
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-8">
-                    <div class="glass-card p-6 border-t-4 border-blue-500">
-                        <div class="flex justify-between items-center mb-6">
-                            <h3 class="text-2xl font-bold">潮流文创专区</h3>
-                            <span class="text-xs bg-blue-500 px-2 py-1 rounded">标准化生产</span>
-                        </div>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="bg-white/5 p-2 rounded">
-                                <div class="aspect-square bg-gray-800 rounded mb-2 flex items-center justify-center text-xs">娃娃服·曜石款</div>
-                                <div class="flex justify-between text-sm"><span>￥49.00</span><button class="yi-yellow text-xs">加入购物车</button></div>
-                            </div>
-                            <div class="bg-white/5 p-2 rounded">
-                                <div class="aspect-square bg-gray-800 rounded mb-2 flex items-center justify-center text-xs">刺绣钥匙扣</div>
-                                <div class="flex justify-between text-sm"><span>￥19.90</span><button class="yi-yellow text-xs">加入购物车</button></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="glass-card p-6 border-t-4 border-yellow-500">
-                        <div class="flex justify-between items-center mb-6">
-                            <h3 class="text-2xl font-bold">非遗高端定制</h3>
-                            <span class="text-xs bg-yellow-500 px-2 py-1 rounded">匠心孤品</span>
-                        </div>
-                        <div class="space-y-4">
-                            <div class="flex items-center space-x-4 p-3 bg-white/5 rounded">
-                                <div class="w-16 h-16 bg-gray-800 rounded flex items-center justify-center text-[10px]">手工礼服</div>
-                                <div class="flex-1">
-                                    <div class="text-sm">彝族图腾定制·大凉山风情</div>
-                                    <div class="text-xs text-gray-500 mt-1">预计工时：15个工作日</div>
-                                </div>
-                                <button class="px-4 py-2 yi-red text-xs rounded">发起洽谈</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <nav class="flex-1 px-4 py-6 space-y-2">
+                <button @click="currentTab = 'production'" :class="{'bg-indigo-700': currentTab === 'production'}" class="w-full flex items-center px-4 py-3 rounded-lg hover:bg-indigo-600 transition">
+                    <span class="font-medium">生产端：智能分单</span>
+                </button>
+                <button @click="currentTab = 'qc'" :class="{'bg-indigo-700': currentTab === 'qc'}" class="w-full flex items-center px-4 py-3 rounded-lg hover:bg-indigo-600 transition">
+                    <span class="font-medium">品控端：AI质检与教学</span>
+                </button>
+                <button @click="currentTab = 'sales'" :class="{'bg-indigo-700': currentTab === 'sales'}" class="w-full flex items-center px-4 py-3 rounded-lg hover:bg-indigo-600 transition">
+                    <span class="font-medium">销售端：产销与溯源</span>
+                </button>
+            </nav>
+            <div class="p-4 text-xs text-indigo-400 text-center border-t border-indigo-800">
+                端云协同架构 Demo
             </div>
-        </section>
+        </aside>
 
-        <section id="trace" class="tab-content">
-            <div class="max-w-4xl mx-auto glass-card p-10">
-                <div class="text-center mb-10">
-                    <h2 class="text-2xl font-bold">订单流水号: <span class="yi-yellow">YX-20251225-888</span></h2>
-                    <p class="text-gray-500 text-sm mt-2">该订单正在越西县城北感恩社区进行手工制作</p>
-                </div>
+        <main class="flex-1 overflow-y-auto p-8 relative">
+            <transition name="fade" mode="out-in">
                 
-                <div class="relative flex justify-between mb-16 px-10">
-                    <div class="absolute top-1/2 left-0 right-0 h-1 bg-gray-800 -translate-y-1/2 z-0"></div>
-                    <div class="absolute top-1/2 left-0 w-2/3 h-1 yi-red -translate-y-1/2 z-0 transition-all duration-1000"></div>
-                    <div class="relative z-10 text-center">
-                        <div class="w-8 h-8 yi-red rounded-full flex items-center justify-center mx-auto mb-2 text-xs">✓</div>
-                        <div class="text-[10px]">任务下发</div>
-                    </div>
-                    <div class="relative z-10 text-center">
-                        <div class="w-8 h-8 yi-red rounded-full flex items-center justify-center mx-auto mb-2 text-xs">✓</div>
-                        <div class="text-[10px]">手工缝制中</div>
-                    </div>
-                    <div class="relative z-10 text-center">
-                        <div class="w-8 h-8 bg-gray-800 rounded-full border-2 border-red-600 flex items-center justify-center mx-auto mb-2 text-xs">○</div>
-                        <div class="text-[10px]">AI质检</div>
-                    </div>
-                    <div class="relative z-10 text-center">
-                        <div class="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-2 text-xs text-gray-600">4</div>
-                        <div class="text-[10px] text-gray-600">打包发货</div>
+                <div v-if="currentTab === 'production'" key="production" class="space-y-6">
+                    <h2 class="text-3xl font-bold text-gray-800 border-l-4 border-indigo-600 pl-4">基于“评估-解构-匹配”的柔性分单系统</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                            <h3 class="text-xl font-semibold mb-4 text-indigo-800">1. 订单任务解构 (微任务池)</h3>
+                            <div class="space-y-3">
+                                <div class="p-3 bg-blue-50 rounded-lg border border-blue-100 flex justify-between items-center">
+                                    <div>
+                                        <span class="text-xs font-bold bg-blue-200 text-blue-800 px-2 py-1 rounded mr-2">潮流线</span>
+                                        <span class="font-medium">棉花娃娃：基础机缝拼接</span>
+                                    </div>
+                                    <span class="text-sm text-gray-500">预估耗时: 15分钟</span>
+                                </div>
+                                <div class="p-3 bg-purple-50 rounded-lg border border-purple-100 flex justify-between items-center">
+                                    <div>
+                                        <span class="text-xs font-bold bg-purple-200 text-purple-800 px-2 py-1 rounded mr-2">高端线</span>
+                                        <span class="font-medium">彝族图腾：核心刺绣部分</span>
+                                    </div>
+                                    <span class="text-sm text-gray-500">预估耗时: 120分钟</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                            <h3 class="text-xl font-semibold mb-4 text-green-800">2. 算法驱动智能派发</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                                    <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">匹配</div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">任务已派发：基础机缝拼接</h4>
+                                        <p class="text-sm text-gray-600 mt-1">接收人：王阿姨 (初级技能)</p>
+                                        <p class="text-xs text-green-600 mt-1">匹配依据：可用“微空闲”时段 14:00-16:00，视力状况良好</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="bg-black border border-red-900/50 rounded-2xl p-6 flex items-center space-x-6">
-                    <div class="w-32 h-32 bg-gray-800 rounded-xl flex items-center justify-center">绣娘照片</div>
-                    <div class="flex-1">
-                        <h4 class="text-lg font-bold">创作者：阿莫某某</h4>
-                        <div class="text-xs text-gray-400 mt-2 leading-relaxed">
-                            "我是越西县安置区的居民，家里的两个孩子正在上小学。感谢您的这份订单，让我能利用下午接孩子前的空闲时间挣到一份工资。每一个针脚都带着我对未来的希望。"
-                        </div>
-                        <div class="mt-4 flex space-x-2">
-                            <span class="px-2 py-1 bg-red-900/30 text-[10px] text-red-400">非遗二级技师</span>
-                            <span class="px-2 py-1 bg-yellow-900/30 text-[10px] text-yellow-400">履约信用 99.8</span>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-xs text-gray-500 mb-1">扫描二维码溯源</div>
-                        <div class="w-20 h-20 bg-white p-1 rounded">
-                            <div class="w-full h-full bg-gray-200">QR</div>
+                <div v-if="currentTab === 'qc'" key="qc" class="space-y-6">
+                    <h2 class="text-3xl font-bold text-gray-800 border-l-4 border-indigo-600 pl-4">计算机视觉质检与辅助教学闭环</h2>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <h3 class="text-xl font-semibold mb-4">关键节点图像上传与反馈</h3>
+                        
+                        <div class="flex flex-col md:flex-row gap-8">
+                            <div class="flex-1 border-2 border-dashed border-gray-300 rounded-xl p-8 text-center bg-gray-50 flex flex-col justify-center items-center">
+                                <div class="w-24 h-24 bg-gray-200 rounded-lg mb-4 flex items-center justify-center text-gray-400">
+                                    [半成品照片]
+                                </div>
+                                <button class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">一键拍照打卡检验</button>
+                                <p class="text-xs text-gray-500 mt-2">系统将自动调用云端标准图谱库进行比对</p>
+                            </div>
+
+                            <div class="flex-1 space-y-4">
+                                <div class="p-4 bg-red-50 border border-red-200 rounded-lg">
+                                    <div class="flex items-center text-red-700 font-bold mb-2">
+                                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>
+                                        质检初筛报告：发现瑕疵
+                                    </div>
+                                    <p class="text-sm text-gray-700">问题标记：<span class="bg-yellow-200 text-yellow-800 px-1 rounded">边缘跳针</span></p>
+                                    <p class="text-xs text-gray-500 mt-1">返修建议：请拆解最后两厘米线迹，调紧缝纫机面线张力重新缝制。</p>
+                                </div>
+
+                                <div class="p-4 bg-yellow-50 border border-yellow-200 rounded-lg shadow-sm border-l-4 border-l-yellow-500">
+                                    <h4 class="font-bold text-yellow-800 mb-1">触发式辅助教学提醒</h4>
+                                    <p class="text-sm text-gray-700">系统检测到该节点高频错误。已为您定向推送微课：</p>
+                                    <a href="#" class="inline-block mt-2 text-indigo-600 font-medium text-sm hover:underline">▶ 视频教程：如何避免棉布厚料的边缘跳针问题</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-    </main>
+                <div v-if="currentTab === 'sales'" key="sales" class="space-y-6">
+                    <h2 class="text-3xl font-bold text-gray-800 border-l-4 border-indigo-600 pl-4">产销一体化与数字溯源网络</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden relative">
+                            <div class="h-32 bg-gradient-to-r from-pink-100 to-rose-100 flex items-center justify-center relative">
+                                <span class="text-rose-800 font-bold text-lg">潮流文创专区</span>
+                                <span class="absolute top-2 right-2 bg-white text-xs px-2 py-1 rounded-full text-rose-600 font-bold">轻量级</span>
+                            </div>
+                            <div class="p-4">
+                                <h4 class="font-bold">民族风棉花娃娃服饰套装</h4>
+                                <p class="text-sm text-gray-500 mt-1">已接入自动拆解流，支持小批量定制。</p>
+                                <button class="mt-4 w-full py-2 bg-gray-900 text-white rounded hover:bg-gray-800 text-sm">模拟下单 (触发生产指令)</button>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden relative">
+                            <div class="h-32 bg-gradient-to-r from-amber-100 to-orange-100 flex items-center justify-center relative">
+                                <span class="text-amber-800 font-bold text-lg">高端非遗定制展厅</span>
+                                <span class="absolute top-2 right-2 bg-white text-xs px-2 py-1 rounded-full text-amber-600 font-bold">高附加值</span>
+                            </div>
+                            <div class="p-4">
+                                <h4 class="font-bold">传统手工彝族图腾银饰绣衣</h4>
+                                <p class="text-sm text-gray-500 mt-1">由系统高信用熟练工匠承接，100%手工溯源。</p>
+                                <button class="mt-4 w-full py-2 border-2 border-gray-900 text-gray-900 rounded hover:bg-gray-50 text-sm">发起集采打样 / 意向洽谈</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <h3 class="text-xl font-semibold mb-6">消费者视角：生产进度透明化与溯源</h3>
+                        <div class="relative border-l-2 border-indigo-200 ml-3 space-y-8">
+                            <div class="relative pl-6">
+                                <div class="absolute w-4 h-4 bg-indigo-600 rounded-full -left-[9px] top-1"></div>
+                                <h4 class="font-bold text-gray-800">订单已支付，系统自动解构派单</h4>
+                                <p class="text-xs text-gray-500">2026-03-01 10:00</p>
+                            </div>
+                            <div class="relative pl-6">
+                                <div class="absolute w-4 h-4 bg-indigo-600 rounded-full -left-[9px] top-1"></div>
+                                <h4 class="font-bold text-gray-800">李阿姨 (高级绣娘) 正在缝制图腾部件</h4>
+                                <p class="text-xs text-gray-500">2026-03-02 14:30</p>
+                            </div>
+                            <div class="relative pl-6">
+                                <div class="absolute w-4 h-4 bg-green-500 rounded-full -left-[9px] top-1"></div>
+                                <h4 class="font-bold text-gray-800">AI视觉质检通过</h4>
+                                <p class="text-xs text-gray-500">2026-03-04 09:15 | 走线平整，无色差</p>
+                            </div>
+                            <div class="relative pl-6">
+                                <div class="absolute w-4 h-4 bg-gray-300 rounded-full -left-[9px] top-1"></div>
+                                <h4 class="font-bold text-gray-400">社区物流集散点已核销揽收，准备发货</h4>
+                                <p class="text-xs text-gray-400">等待执行...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </transition>
+        </main>
+    </div>
 
     <script>
-        function showTab(tabId) {
-            // 隐藏所有内容
-            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-            // 移除导航栏激活状态
-            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-            // 显示目标内容
-            document.getElementById(tabId).classList.add('active');
-            // 激活对应按钮
-            document.getElementById('btn-' + tabId).classList.add('active');
-        }
+        const { createApp, ref } = Vue;
+        createApp({
+            setup() {
+                // 默认显示第一个 Tab：生产管理
+                const currentTab = ref('production'); 
+                return {
+                    currentTab
+                }
+            }
+        }).mount('#app');
     </script>
 </body>
 </html>
